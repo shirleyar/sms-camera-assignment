@@ -6,7 +6,15 @@ import {Container, Row, Col} from 'react-bootstrap'
 class App extends Component {
   render() {
     return (
-      <PhoneForm/>
+      <div className="Form">
+       <Container>
+         <Row>
+           <Col sm={10}>
+             <PhoneForm/>
+           </Col>
+         </Row>
+       </Container>
+      </div>
     );
   }
 }

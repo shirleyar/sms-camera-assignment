@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
-import {Form, Row, Col, Button, Container} from "react-bootstrap";
+import {Form, Row, Col, Button} from "react-bootstrap";
 import NotifyLabel from './NotifyLabel';
 import 'react-phone-number-input/style.css'
 import uuid from 'uuid/v4'
@@ -35,6 +35,7 @@ class PhoneForm extends Component {
         errorSendSms: response.status !== CREATED
       };
       this.setState(newState);
+      // todo: add here call to backend + handle response
     } catch (error) {
       this.setState({
         errorSendSms: true
@@ -44,59 +45,51 @@ class PhoneForm extends Component {
 
   render() {
     return (
-      <div className="Form">
-        <Container>
+      <Form onSubmit={e => this.handleSubmit(e)}>
+        <Form.Group as={Row}>
+          <Form.Label column sm={4}>Mobile phone</Form.Label>
+          <Col sm='auto'>
+            <PhoneInput
+              placeholder='Enter mobile number'
+              value={this.state.phone}
+              country="IL"
+              onChange={phone => {
+                this.setState({
+                  phone,
+                  sentSms: false
+                })
+              }}
+              error={this.state.phone ? (isValidPhoneNumber(this.state.phone) ? undefined : 'Invalid phone number') : undefined}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group>
+          <Col>
+            <Button
+              disabled={this.state.sentSms || !this.state.phone || !isValidPhoneNumber(this.state.phone)}
+              variant="primary"
+              type="submit">
+              Send SMS
+            </Button>
+          </Col>
+        </Form.Group>
           <Row>
-            <Col sm={10}>
-              <Form onSubmit={e => this.handleSubmit(e)}>
-                <Form.Group as={Row}>
-                  <Form.Label column sm={4}>Mobile phone</Form.Label>
-                  <Col sm='auto'>
-                    <PhoneInput
-                      placeholder='Enter mobile number'
-                      value={this.state.phone}
-                      country="IL"
-                      onChange={phone => {
-                        this.setState({
-                          phone,
-                          sentSms: false
-                        })
-                      }}
-                      error={this.state.phone ? (isValidPhoneNumber(this.state.phone) ? undefined : 'Invalid phone number') : undefined}
-                    />
-                  </Col>
-                </Form.Group>
-                <Form.Group>
-                  <Col>
-                    <Button
-                      disabled={this.state.sentSms || !this.state.phone || !isValidPhoneNumber(this.state.phone)}
-                      variant="primary"
-                      type="submit">
-                      Send SMS
-                    </Button>
-                  </Col>
-                </Form.Group>
-                <Row>
-                  <Col sm={15}>
-                    {this.state.sentSms && this.state.errorSendSms &&
-                    <NotifyLabel
-                      success={false} // only one can be true in this case.
-                      heading={'Error sending sms'}
-                      text={'Please check number and country or try again later'}
-                    />}
-                    {this.state.sentSms && !this.state.errorSendSms &&
-                    <NotifyLabel
-                      success={true} // only one can be true in this case.
-                      heading={`Sent sms successfully to number ${this.state.phone}`}
-                      text={''}
-                    />}
-                  </Col>
-                </Row>
-              </Form>
+            <Col sm={15}>
+              {this.state.sentSms && this.state.errorSendSms &&
+              <NotifyLabel
+                success={false} // only one can be true in this case.
+                heading={'Error sending sms'}
+                text={'Please check number and country or try again later'}
+              />}
+              {this.state.sentSms && !this.state.errorSendSms &&
+              <NotifyLabel
+                success={true} // only one can be true in this case.
+                heading={`Sent sms successfully to number ${this.state.phone}`}
+                text={''}
+              />}
             </Col>
           </Row>
-        </Container>
-      </div>
+      </Form>
     );
   }
 }
