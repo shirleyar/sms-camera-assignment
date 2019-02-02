@@ -5,8 +5,8 @@ module.exports = {
   baseUrl: process.env.BASE_URL || '/smsServer/api',
   version: process.env.VERSION || 'v1',
   port: parseInt(process.env.PORT, this.decimalRadix) || 3001,
-  smsKey: process.env.SMS_KEY || '562a5035', // todo: handle secrets
-  smsSecret: process.env.SMS_SECRET || '9Z5y44FVvgbCYSCC', // todo: handle secrets
+  smsKey: process.env.SMS_KEY || '562a5035',
+  smsSecret: process.env.SMS_SECRET || '9Z5y44FVvgbCYSCC',
   requestIdHdr: 'x-request-id',
   decimalRadix: 10,
   sentUrl: 'hello from node', // todo: add link to be sent to user

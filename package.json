@@ -8,6 +8,7 @@
     "concurrently": "^4.1.0"
   },
   "scripts": {
+    "build": "cd frontend && npm run build",
     "server": "cd backend && npm start",
     "client": "cd frontend && npm start",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
