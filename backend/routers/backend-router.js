@@ -9,9 +9,6 @@ class Router {
   init() {
     const controller = new Controller();
     this.router.post('/send', controller.sendSms);
-    this.router.get('*', (req, res) => {
-      res.sendFile('../../frontend/build/index.html');
-    });
   }
 
   get() {

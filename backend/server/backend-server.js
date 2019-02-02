@@ -18,8 +18,14 @@ class Server {
     const url = `${constants.baseUrl}/${constants.version}`;
     this.server.use(url, router.get());
     if (process.env.NODE_ENV === 'production') {
-      // Exprees will serve up production assets
       this.server.use(express.static('../../frontend/build'));
+      this.server.get('*', (req, res) => {
+        res.sendFile('../../frontend/build/index.html');
+        const path = require('path');
+        this.server.get('*', (req, res) => {
+          res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
+        });
+      });
     }
   }
 
