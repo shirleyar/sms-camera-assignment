@@ -4,7 +4,7 @@ module.exports = {
   logLevel: process.env.LOG_LEVEL || 'info',
   baseUrl: process.env.BASE_URL || '/smsServer/api',
   version: process.env.VERSION || 'v1',
-  port: parseInt(process.env.PORT, this.decimalRadix) || 3001,
+  port: parseInt(process.env.PORT, this.decimalRadix) || 5000,
   smsKey: process.env.SMS_KEY || '562a5035',
   smsSecret: process.env.SMS_SECRET || '9Z5y44FVvgbCYSCC',
   requestIdHdr: 'x-request-id',
