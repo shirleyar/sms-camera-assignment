@@ -24,7 +24,7 @@ class Server {
   }
 
   start(port) {
-    this.server.listen( process.env.PORT || 3001, () => {
+    this.server.listen( port, () => {
       logger.info(`Server is listening on port ${port}. base url: ${constants.baseUrl}`);
     }).on('error', (err) => {
       logger.error(`Server could NOT start on port ${port}`);

@@ -8,13 +8,11 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 const routing = (
   <Router>
-    <div>
       <Switch>
         <Route exact path='/' component={App}/>
         <Route path='/cam' component={CameraOpener}/>
         <Route component={NotFound}/>
       </Switch>
-    </div>
   </Router>
 );
 
