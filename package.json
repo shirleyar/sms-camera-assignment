@@ -1,6 +1,9 @@
 {
   "name": "sms-camera-assignment",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.14.1"
+  },
   "description": "",
   "main": "index.js",
   "dependencies": {},
