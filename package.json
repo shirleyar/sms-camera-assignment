@@ -11,7 +11,7 @@
     "build": "cd frontend && npm run build",
     "server": "cd backend && npm start",
     "client": "cd frontend && npm start",
-    "start": "npm run server",
+    "start": "node backend/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd frontend && npm i && npm run build"
   },
