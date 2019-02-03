@@ -18,7 +18,7 @@ class Server {
     this.server.use(json());
     const url = `${constants.baseUrl}/${constants.version}`;
     this.server.use(url, router.get());
-    this.server.use(express.static(path.join('../frontend/build','html')));
+    this.server.use(express.static(path.join('../frontend/', 'build')));
     this.server.get('/*', (req, res) => {
       res.sendFile(path.resolve('../frontend/build/index.html'));
     });
