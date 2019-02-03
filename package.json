@@ -12,9 +12,10 @@
   },
   "scripts": {
     "build": "cd frontend && npm run build",
-    "server": "cd backend && npm start",
-    "client": "cd frontend && npm start",
+    "server-dev": "cd backend && npm start",
+    "client-dev": "cd frontend && npm run dev",
     "start": "cd backend && npm i --production && node app.js",
+    "start-dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd frontend && npm i && npm run build "
   },
