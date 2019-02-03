@@ -9,6 +9,7 @@
     "http-status-codes": "^1.3.0",
     "jquery": "^3.3.1",
     "react": "^16.7.0",
+    "react-app-polyfill": "^0.2.0",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.7.0",
     "react-html5-camera-photo": "^1.2.9",
@@ -36,5 +37,4 @@
   "devDependencies": {},
   "proxy": "https://fierce-reaches-16958.herokuapp.com/",
   "homepage": "."
-
 }
