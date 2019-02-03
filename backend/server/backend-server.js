@@ -26,7 +26,6 @@ class Server {
     }
   }
 
-
   get() {
     return this.server;
   }
