@@ -1,6 +1,7 @@
 const express = require('express');
 const {json} = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const constants = require('../utils/constants');
 const Router = require('../routers/backend-router');
 const logger = require('../utils/logger');
@@ -17,13 +18,11 @@ class Server {
     this.server.use(json());
     const url = `${constants.baseUrl}/${constants.version}`;
     this.server.use(url, router.get());
-    if (process.env.NODE_ENV === 'production') {
-      this.server.use(express.static('../../frontend/build'));
-      const path = require('path');
-      this.server.get('/*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
-      });
-    }
+    this.server.use(express.static('../../frontend/build'));
+    this.server.get('/*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../../frontend', 'build'), 'index.html');
+      res.end();
+    });
   }
 
   get() {
