@@ -5,8 +5,8 @@ module.exports = {
   baseUrl: process.env.BASE_URL || '/smsServer/api',
   version: process.env.VERSION || 'v1',
   port: parseInt(process.env.PORT, this.decimalRadix) || 5000,
-  smsKey: process.env.SMS_KEY || '562a5035',
-  smsSecret: process.env.SMS_SECRET || '9Z5y44FVvgbCYSCC',
+  smsKey: process.env.SMS_KEY,
+  smsSecret: process.env.SMS_SECRET,
   requestIdHdr: 'x-request-id',
   decimalRadix: 10,
   sentUrl: 'https://fierce-reaches-16958.herokuapp.com/#/cam',
@@ -22,4 +22,5 @@ module.exports = {
   unhandledRejectionCode: -1,
   unhandledExceptionCode: -2,
   killSignal: 128,
+  gracefulShutdownSec: 5
 };

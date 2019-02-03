@@ -1,7 +1,7 @@
 const assert = require('assert');
 const httpStatusCodes = require('http-status-codes');
 const _ = require('lodash');
-const constants = require('../utils/constants');
+const {generalInternalError,badRequestErrorDesc, generalErrorDesc, badRequestErrorMsg, generalErrorMsg } = require('../utils/constants');
 
 class ErrorResponse {
   constructor(error, reqId) {
@@ -16,7 +16,7 @@ class ErrorResponse {
     if (error instanceof assert.AssertionError) {
       code = `${httpStatusCodes.BAD_REQUEST}0`;
     } else {
-      const errorCode = _.get(error, 'messages[0].status', constants.generalInternalError);
+      const errorCode = _.get(error, 'messages[0].status', generalInternalError);
       code = `${httpStatusCodes.INTERNAL_SERVER_ERROR}${errorCode}`;
     }
     return code;
@@ -24,14 +24,14 @@ class ErrorResponse {
 
   static calculateErrorDesc(error) {
     return error instanceof assert.AssertionError
-      ? `${constants.badRequestErrorDesc} | ${error.message}`
-      : `${constants.generalErrorDesc}`;
+      ? `${badRequestErrorDesc} | ${error.message}`
+      : `${generalErrorDesc}`;
   }
 
   static calculateErrorMsg(error) {
     return error instanceof assert.AssertionError
-      ? `${constants.badRequestErrorMsg}`
-      : `${constants.generalErrorMsg}`;
+      ? `${badRequestErrorMsg}`
+      : `${generalErrorMsg}`;
   }
 }
 

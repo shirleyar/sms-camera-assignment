@@ -1,8 +1,5 @@
 const Nexmo = require('nexmo');
-const validator = require('validator');
-const _ = require('lodash');
-const assert = require('assert');
-const constants = require('./constants');
+const {smsKey, smsSecret, nexmoSuccess, decimalRadix} = require('./constants');
 const logger = require('./logger');
 
 const from = 'HomeAssignment';
@@ -10,8 +7,8 @@ const from = 'HomeAssignment';
 class SmsSender {
   constructor() {
     this.nexmo = new Nexmo({
-      apiKey: constants.smsKey,
-      apiSecret: constants.smsSecret,
+      apiKey: smsKey,
+      apiSecret: smsSecret,
     }, {
       debug: true,
       logger,
@@ -25,7 +22,7 @@ class SmsSender {
           logger.error({ request_id: reqId, error }, `Failed sending the sms to number ${toNumber}`);
           reject(error);
         }
-        if (response.messages[0].status === constants.nexmoSuccess) {
+        if (response.messages[0].status === nexmoSuccess) {
           logger.debug({ request_id: reqId }, `sent sms to number ${toNumber} successfully`);
           resolve();
         } else {
@@ -44,7 +41,7 @@ class SmsSender {
           logger.error({ request_id: reqId, error }, `Failed validating the number ${number}`);
           reject(error);
         }
-        const isValid = result.status === parseInt(constants.nexmoSuccess, constants.decimalRadix);
+        const isValid = result.status === parseInt(nexmoSuccess, decimalRadix);
         logger.debug({ request_id: reqId }, `validation result for number ${number}: ${isValid}`);
         resolve(isValid);
       });

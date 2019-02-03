@@ -35,7 +35,6 @@ class PhoneForm extends Component {
         errorSendSms: response.status !== CREATED
       };
       this.setState(newState);
-      // todo: add here call to backend + handle response
     } catch (error) {
       this.setState({
         errorSendSms: true
