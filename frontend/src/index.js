@@ -7,15 +7,16 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 const routing = (
-  <Router>
+  <Router basename={'/'}>
+    <main>
       <Switch>
-        <Route exact path='/' component={App}/>
-        <Route path='/cam' component={CameraOpener}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/`} component={App}/>
+        <Route path={`${process.env.PUBLIC_URL}/cam`} component={CameraOpener}/>
         <Route component={NotFound}/>
       </Switch>
+    </main>
   </Router>
 );
-
 
 ReactDOM.render(routing, document.getElementById('root'));
 

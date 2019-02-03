@@ -20,7 +20,7 @@ class Server {
     if (process.env.NODE_ENV === 'production') {
       this.server.use(express.static('../../frontend/build'));
       const path = require('path');
-      this.server.get('*', (req, res) => {
+      this.server.get('/*', (req, res) => {
         res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
       });
     }
@@ -34,7 +34,7 @@ class Server {
     this.server.listen(port, () => {
       logger.info(`Server is listening on port ${port}. base url: ${constants.baseUrl}`);
     }).on('error', (err) => {
-      logger.error(`Server could NOT start on port ${port}`);
+      logger.error(`Server could NOT start on port ${port}. error: ${err.message}`);
       throw err;
     });
   }

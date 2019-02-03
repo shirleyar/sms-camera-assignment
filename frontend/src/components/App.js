@@ -7,13 +7,13 @@ class App extends Component {
   render() {
     return (
       <div className="Form">
-       <Container>
-         <Row>
-           <Col sm={10}>
-             <PhoneForm/>
-           </Col>
-         </Row>
-       </Container>
+        <Container>
+          <Row>
+            <Col sm={10}>
+              <PhoneForm/>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
