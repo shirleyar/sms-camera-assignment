@@ -9,7 +9,7 @@ module.exports = {
   smsSecret: process.env.SMS_SECRET || '9Z5y44FVvgbCYSCC',
   requestIdHdr: 'x-request-id',
   decimalRadix: 10,
-  sentUrl: 'hello from node', // todo: add link to be sent to user
+  sentUrl: 'https://fierce-reaches-16958.herokuapp.com/#/cam',
   nexmoSuccess: '0',
   sentSuccessfullyCode: 0,
   sentSuccessfullyMsg: 'success',
