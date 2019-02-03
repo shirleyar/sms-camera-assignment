@@ -1,5 +1,5 @@
 const express = require('express');
-const { json } = require('body-parser');
+const {json} = require('body-parser');
 const cors = require('cors');
 const constants = require('../utils/constants');
 const Router = require('../routers/backend-router');
@@ -19,22 +19,20 @@ class Server {
     this.server.use(url, router.get());
     if (process.env.NODE_ENV === 'production') {
       this.server.use(express.static('../../frontend/build'));
+      const path = require('path');
       this.server.get('*', (req, res) => {
-        res.sendFile('../../frontend/build/index.html');
-        const path = require('path');
-        this.server.get('*', (req, res) => {
-          res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
-        });
+        res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
       });
     }
   }
+
 
   get() {
     return this.server;
   }
 
   start(port) {
-    this.server.listen( port, () => {
+    this.server.listen(port, () => {
       logger.info(`Server is listening on port ${port}. base url: ${constants.baseUrl}`);
     }).on('error', (err) => {
       logger.error(`Server could NOT start on port ${port}`);
