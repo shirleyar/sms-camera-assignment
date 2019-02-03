@@ -10,7 +10,10 @@ class CameraOpener extends Component {
     return (
       <div>
         <Camera
-          onCameraError={error=> this.onCameraError(error)}/>
+          onCameraError={error => {
+            this.onCameraError(error)
+          }}
+        />
       </div>
     )
   }

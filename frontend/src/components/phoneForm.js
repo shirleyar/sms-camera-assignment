@@ -13,13 +13,15 @@ class PhoneForm extends Component {
     this.state = {
       phone: undefined,
       errorSendSms: false,
-      sentSms: false
+      sentSms: false,
+      sending: false
     };
   }
 
   handleSubmit = async e => {
     e.preventDefault();
     try {
+      this.setState({sending: true});
       let response = await fetch(`/smsServer/api/v1/send`, {
         method: 'POST',
         headers: {
@@ -30,7 +32,10 @@ class PhoneForm extends Component {
           toNumber: this.state.phone
         })
       });
-      this.setState({sentSms: true});
+      this.setState({
+        sentSms: true,
+        sending: false
+      });
       const newState = {
         errorSendSms: response.status !== CREATED
       };
@@ -65,29 +70,29 @@ class PhoneForm extends Component {
         <Form.Group>
           <Col>
             <Button
-              disabled={this.state.sentSms || !this.state.phone || !isValidPhoneNumber(this.state.phone)}
+              disabled={this.state.sending || this.state.sentSms || !this.state.phone || !isValidPhoneNumber(this.state.phone)}
               variant="primary"
               type="submit">
-              Send SMS
+              {this.state.sending ? 'Sending...' :'Send SMS'}
             </Button>
           </Col>
         </Form.Group>
-          <Row>
-            <Col sm={15}>
-              {this.state.sentSms && this.state.errorSendSms &&
-              <NotifyLabel
-                success={false} // only one can be true in this case.
-                heading={'Error sending sms'}
-                text={'Please check number and country or try again later'}
-              />}
-              {this.state.sentSms && !this.state.errorSendSms &&
-              <NotifyLabel
-                success={true} // only one can be true in this case.
-                heading={`Sent sms successfully to number ${this.state.phone}`}
-                text={''}
-              />}
-            </Col>
-          </Row>
+        <Row>
+          <Col sm={15}>
+            {this.state.sentSms && this.state.errorSendSms &&
+            <NotifyLabel
+              success={false} // only one can be true in this case.
+              heading={'Error sending sms'}
+              text={'Please check number and country or try again later'}
+            />}
+            {this.state.sentSms && !this.state.errorSendSms &&
+            <NotifyLabel
+              success={true} // only one can be true in this case.
+              heading={`Sent sms successfully to number ${this.state.phone}`}
+              text={''}
+            />}
+          </Col>
+        </Row>
       </Form>
     );
   }

@@ -6,7 +6,7 @@ import {Container, Row, Col} from 'react-bootstrap'
 class App extends Component {
   render() {
     return (
-      <div className="Form">
+      <div>
         <Container>
           <Row>
             <Col sm={10}>
