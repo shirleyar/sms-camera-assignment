@@ -1,7 +1,8 @@
 # sms-camera-assignment
 
-This app gets a mobile phone number and sends an sms the recipient with a link that opens the device camera.    
-It is written in Node.js in the backend (Express.js framework) and React and bootstrap in the frontend.     
+This app gets a mobile phone number and sends an SMS to the recipient with a link that opens the device's camera.
+
+It is written in Node.js in the backend (Express.js framework) and React & bootstrap in the frontend.     
 Deployed to Heroku.
 
 App public URL:     https://fierce-reaches-16958.herokuapp.com/
